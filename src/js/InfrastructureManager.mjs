@@ -8,7 +8,7 @@ export default class InfrastructureManager {
 
   renderRentalStations(stations) {
     this.rentalStations.innerHTML = stations
-      .slice(0, 10)
+      .slice(0, 5)
       .map((station) => `<li>${station.name}</li>`)
       .join("");
   }
@@ -35,7 +35,7 @@ export default class InfrastructureManager {
 
     this.repairStations.innerHTML = repairs.length
       ? repairs
-          .slice(0, 10)
+          .slice(0, 5)
           .map(
             (repair) => `
                         <li>
@@ -48,7 +48,7 @@ export default class InfrastructureManager {
 
     this.nearbyServices.innerHTML = services.length
       ? services
-          .slice(0, 10)
+          .slice(0, 5)
           .map(
             (service) => `
                         <li>

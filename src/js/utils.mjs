@@ -7,9 +7,9 @@ export function setLocalStorage(key, data) {
 }
 
 export async function loadHeaderFooter() {
-  const headerResponse = await fetch("/public/partials/header.html");
+  const headerResponse = await fetch("/partials/header.html");
 
-  const footerResponse = await fetch("/public/partials/footer.html");
+  const footerResponse = await fetch("/partials/footer.html");
 
   document.querySelector("#main-header").innerHTML =
     await headerResponse.text();

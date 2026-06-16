@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Plan bicycle routes across Europe with route details, bike rental stations and favorites."
+    />
+
+    <meta
+      name="keywords"
+      content="cycling routes,europe,bike planner,bicycle travel"
+    />
+    <title>EuroCycle Route Planner</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  </head>
+
+  <body>
+    <header id="main-header"></header>
+
+    <main class="container">
+      <section class="hero">
+            <img
+        src="/images/logo.png"
+        alt="EuroCycle Route Planner Logo"
+        class="hero-logo"
+    >
+        <h1>EuroCycle Route Planner</h1>
+
+        <p>Discover cycling routes across Europe.</p>
+      </section>
+
+      <section class="search-panel">
+        <label for="startLocation">Start Location</label>
+        <input id="startLocation" type="text" placeholder="Start location" aria-label="Start location"/>
+
+        <label for="endLocation">Destination</label>
+        <input id="endLocation" type="text" placeholder="Destination" aria-label="Destination"/>
+
+        <button id="searchBtn" class="btn">Search Cycling Route</button>
+      </section>
+
+      <section class="content-grid">
+        <div id="map"></div>
+
+        <aside class="route-info">
+          <h2>Route Details</h2>
+          <p>
+            Route:
+            <span id="routeName">-</span>
+          </p>
+          <p>
+            Distance:
+            <span id="distance">-</span>
+          </p>
+
+          <p>
+            Duration:
+            <span id="duration">-</span>
+          </p>
+
+          <p>
+            Difficulty:
+            <span id="difficulty">-</span>
+          </p>
+
+          <button id="saveBtn" class="btn">Save Route to Favorites</button>
+
+  
+        </aside>
+
+        
+      </section>
+
+              <section class="infrastructure-panel">
+
+    <h2>Infrastructure Information</h2>
+
+    <div class="filters">
+
+        <button
+            id="rentalFilter"
+            class="filter-btn active"
+        >
+            Rental
+        </button>
+
+        <button
+            id="repairFilter"
+            class="filter-btn active"
+        >
+            Repair
+        </button>
+
+    </div>
+
+    <div id="infrastructureContainer">
+
+        <div class="info-section">
+
+            <h3>Rental Stations</h3>
+
+            <ul id="rentalStations"></ul>
+
+        </div>
+
+        <div class="info-section">
+
+            <h3>Repair Stations</h3>
+
+            <ul id="repairStations"></ul>
+
+        </div>
+
+        <div class="info-section">
+
+            <h3>Nearby Services</h3>
+
+            <ul id="nearbyServices"></ul>
+
+        </div>
+
+    </div>
+
+</section>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

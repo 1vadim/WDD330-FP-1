@@ -28,22 +28,34 @@ export default class MapManager {
     if (!station.location || !station.location.latitude) {
       return;
     }
-
-    L.marker([station.location.latitude, station.location.longitude])
-      .addTo(this.map)
-      .bindPopup(station.name);
+    this.addInfrastructureMarker(
+      station.location.latitude,
+      station.location.longitude,
+      station.name,
+      "rental"
+    );
   }
+
   addInfrastructureMarker(lat, lon, title, type) {
-    let iconText = "🚴";
+let iconText = "📍"; 
 
-    if (type === "bicycle_repair_station") {
-      iconText = "🔧";
-    }
+if (type === "bicycle_repair_station") {
+  iconText = "🔧"; 
+} else if (type === "bicycle") {
+  iconText = "🏪"; 
+} else if (type === "rental") {
+  iconText = "🚴";
+}
 
-    if (type === "bicycle") {
-      iconText = "🏪";
-    }
+const emojiIcon = L.divIcon({
+  html: `<div style="font-size: 24px; line-height: 1; text-align: center;">${iconText}</div>`,
+  className: "custom-emoji-marker", 
+  iconSize: [30, 30],
+  iconAnchor: [15, 15], 
+});
 
-    L.marker([lat, lon]).addTo(this.map).bindPopup(`${iconText} ${title}`);
+L.marker([lat, lon], { icon: emojiIcon })
+  .addTo(this.map)
+  .bindPopup(`<b>${title}</b><br>Type: ${type || "Unknown"}`);
   }
 }

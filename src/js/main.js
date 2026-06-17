@@ -107,49 +107,54 @@ async function searchRoute() {
     }
 
     console.log("4. Request for rental stations...");
-    bikeStations.renderStations();
 
-    let allStations = [];
-    try {
-      allStations = await services.getBikeStations();
-    } catch (e) {
-      console.error(
-        "Error occurred while fetching bike stations, but continuing:",
-        e
-      );
-    }
+let allStations = [];
+try {
+  allStations = await services.getBikeStations();
+} catch (e) {
+  console.error(
+    "Error occurred while fetching bike stations, but continuing:",
+    e
+  );
+}
 
-    if (Array.isArray(allStations) && allStations.length > 0) {
-      console.log("5. Sorting stations...");
+if (Array.isArray(allStations) && allStations.length > 0) {
+  console.log("5. Sorting stations...");
 
-      const sortedStations = allStations.sort((stationA, stationB) => {
-        const latA = stationA.location?.latitude || stationA.latitude || 0;
-        const lonA = stationA.location?.longitude || stationA.longitude || 0;
-        const latB = stationB.location?.latitude || stationB.latitude || 0;
-        const lonB = stationB.location?.longitude || stationB.longitude || 0;
+  const sortedStations = allStations.sort((stationA, stationB) => {
+    const latA = stationA.location?.latitude || stationA.latitude || 0;
+    const lonA = stationA.location?.longitude || stationA.longitude || 0;
+    const latB = stationB.location?.latitude || stationB.latitude || 0;
+    const lonB = stationB.location?.longitude || stationB.longitude || 0;
 
-        const distA = calculateDistanceBetweenCoords(
-          startLat,
-          startLon,
-          Number(latA),
-          Number(lonA)
-        );
-        const distB = calculateDistanceBetweenCoords(
-          startLat,
-          startLon,
-          Number(latB),
-          Number(lonB)
-        );
-        return distA - distB;
-      });
+    const distA = calculateDistanceBetweenCoords(
+      startLat,
+      startLon,
+      Number(latA),
+      Number(lonA)
+    );
+    const distB = calculateDistanceBetweenCoords(
+      startLat,
+      startLon,
+      Number(latB),
+      Number(lonB)
+    );
+    return distA - distB;
+  });
 
-      const closestStations = sortedStations.slice(0, 10);
-      infrastructure.renderRentalStations(closestStations);
-    } else {
-      console.log(
-        "No stations were found or the API returned an invalid response."
-      );
-    }
+  const closestStationsForMap = sortedStations.slice(0, 15);
+
+  closestStationsForMap.forEach((station) => {
+    mapManager.addStation(station);
+  });
+
+  const closestStationsForList = sortedStations.slice(0, 5);
+  infrastructure.renderRentalStations(closestStationsForList);
+} else {
+  console.log(
+    "No stations were found or the API returned an invalid response."
+  );
+}
   } catch (error) {
     console.error("CRITICAL ERROR during the whole process:", error);
     alert("An unexpected error occurred. Please check console for details.");

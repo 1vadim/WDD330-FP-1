@@ -22,13 +22,16 @@ export default class InfrastructureManager {
       (element) => element.tags?.shop === "bicycle"
     );
 
-    elements.forEach((item) => {
+    const combinedInfrastructure = [...repairs, ...services].slice(0, 15);
+
+    combinedInfrastructure.forEach((item) => {
       if (item.lat && item.lon) {
+        const type = item.tags?.amenity || item.tags?.shop || "default";
         this.mapManager.addInfrastructureMarker(
           item.lat,
           item.lon,
           item.tags?.name || "Infrastructure",
-          item.tags?.amenity || item.tags?.shop
+          type
         );
       }
     });

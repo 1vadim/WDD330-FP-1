@@ -22,7 +22,7 @@ export default class InfrastructureManager {
       (element) => element.tags?.shop === "bicycle"
     );
 
-    const combinedInfrastructure = [...repairs, ...services].slice(0, 15);
+    const combinedInfrastructure = [...repairs, ...services].slice(0, 5);
 
     combinedInfrastructure.forEach((item) => {
       if (item.lat && item.lon) {

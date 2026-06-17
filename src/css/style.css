@@ -213,6 +213,12 @@ body {
   animation: fadeIn 1.2s ease;
 }
 
+.custom-emoji-marker {
+
+    background: transparent;
+    border: none;
+}
+
 
 
 @keyframes fadeIn {
